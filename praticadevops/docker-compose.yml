@@ -1,0 +1,26 @@
+########################################################################
+# Este arquivo docker-compose faz uso das imagens originais, 
+# personalizadas por meio dos Dockerfile.
+#
+# Para inicializar os contêiners utilizando este aquivo, estando no 
+# diretório no qual este arquivo se localiza, basta executar:
+#
+# docker-compose up
+#
+########################################################################
+services:
+  lifecaremysql:
+    build: ./Banco
+    restart: always
+    ports:
+      - "3608:3306"
+    volumes:
+      - ./data:/var/lib/mysql
+
+  springbootlifecare:
+    build: ./atividadeModulo2
+    restart: always
+    ports:
+      - "8081:8080"
+    depends_on:
+      - lifecaremysql
