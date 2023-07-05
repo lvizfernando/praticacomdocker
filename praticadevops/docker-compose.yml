@@ -8,12 +8,14 @@
 # docker-compose up
 #
 ########################################################################
+version: '3'
 services:
-  lifecaremysql:
+  mysql:
+    container_name: "mysql"
     build: ./Banco
     restart: always
     ports:
-      - "3608:3306"
+      - "3306:3306"
     volumes:
       - ./data:/var/lib/mysql
 
@@ -23,4 +25,5 @@ services:
     ports:
       - "8081:8080"
     depends_on:
-      - lifecaremysql
+      - mysql
+
